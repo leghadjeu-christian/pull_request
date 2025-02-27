@@ -7,5 +7,5 @@ edition = "2021"
 derive = "1.0.0"
 features = "0.10.0"
 octocrab = "0.43.0"
-tokio = "1.43.0"
+tokio = {version = "1.43.0", features = ["full"] }
 
