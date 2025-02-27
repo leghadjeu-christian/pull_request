@@ -1,0 +1,27 @@
+name: Rust Action
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  extract-pr-number:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Install dependencies
+        run: cargo install --force cargo-deps
+
+      - name: Run Rust program
+        run: cargo run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
